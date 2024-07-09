@@ -10,6 +10,7 @@ from forms import *
 from flask_gravatar import Gravatar
 from functools import wraps
 from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy import URL
 import os
 
 app = Flask(__name__)
