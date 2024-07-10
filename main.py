@@ -12,6 +12,15 @@ from functools import wraps
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
+print("*************************************************************")
+print("SECRET KEY  from env")
+print(os.environ.get("SECRET_KEY"))
+print("DATABASE URI from env")
+print(os.environ.get("DATABASE_URI"))
+print("Whole os environment")
+print(os.environ)
+print("*************************************************************")
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI")
