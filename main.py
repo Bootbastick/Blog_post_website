@@ -14,8 +14,16 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+print(app.config)
+
 ckeditor = CKEditor(app)
 Bootstrap(app)
+
+# CONNECT TO DB
+db = SQLAlchemy(app)
+Base = declarative_base()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -28,13 +36,6 @@ gravatar = Gravatar(app,
                     force_lower=False,
                     use_ssl=False,
                     base_url=None)
-
-# CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-Base = declarative_base()
 
 
 # CONFIGURE TABLES
