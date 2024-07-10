@@ -112,7 +112,7 @@ def get_all_posts():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    form = RegisterForm
+    form = RegisterForm(request.form)
     if request.method == "POST" and form.validate_on_submit():
         user_email = request.form["email"]
 
@@ -137,7 +137,7 @@ def register():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    form = LoginForm
+    form = LoginForm(request.form)
     if request.method == "POST" and form.validate_on_submit():
         user = User.query.filter_by(email=request.form["email"]).first()
 
@@ -204,7 +204,7 @@ def contact():
 @login_required
 @admin_only
 def add_new_post():
-    form = CreatePostForm()
+    form = CreatePostForm(request.form)
     if form.validate_on_submit():
         author = User.query.filter_by(id=current_user.get_id()).first()
         new_post = BlogPost(
